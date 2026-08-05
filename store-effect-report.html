@@ -3,9 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="prototype-release" content="V2.1 · 2026-08-05 · 多选筛选向下扩展">
   <title>经营分析｜店效报告</title>
-  <style>
-    :root{--ink:#17212e;--muted:#697688;--line:#e5ebf0;--bg:#f5f7f9;--panel:#fff;--blue:#196bd8;--blue-soft:#edf5ff;--green:#178160;--green-soft:#eaf7f1;--amber:#ad6a10;--amber-soft:#fff5e5;--red:#c7404f;--red-soft:#fff0f2;--nav:#172331}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <style id="ui-standardized-styles">
+    /* 店效报告 V1.4：按原始层叠顺序归并；保留既有视觉与业务交互。 */
+
+    /* Layer 01 */
+:root{--ink:#17212e;--muted:#697688;--line:#e5ebf0;--bg:#f5f7f9;--panel:#fff;--blue:#196bd8;--blue-soft:#edf5ff;--green:#178160;--green-soft:#eaf7f1;--amber:#ad6a10;--amber-soft:#fff5e5;--red:#c7404f;--red-soft:#fff0f2;--nav:#172331}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,"SF Pro Text","PingFang SC","Noto Sans SC",sans-serif} button,input,select{font:inherit} button{cursor:pointer}
     .app{max-width:1480px;margin:0 auto;min-height:100vh;background:var(--bg)}.top{height:64px;background:#fff;display:flex;align-items:center;gap:28px;padding:0 28px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:.2px;white-space:nowrap}.mark{width:28px;height:28px;position:relative;display:block}.mark:before{content:"";position:absolute;left:3px;top:5px;width:17px;height:14px;background:#1d78ee;border-radius:3px 7px 7px 3px;clip-path:polygon(0 0,72% 0,100% 23%,72% 45%,100% 67%,72% 100%,0 100%,24% 50%)}.mark:after{content:"";position:absolute;right:2px;bottom:4px;width:9px;height:9px;background:#ff8a28;border-radius:2px 6px 6px 2px;transform:rotate(18deg)}.global-menu{display:flex;align-items:stretch;gap:22px;height:100%;white-space:nowrap}.global-menu button{border:0;border-bottom:2px solid transparent;background:transparent;color:#344154;padding:0;font-size:13px}.global-menu button:hover{color:var(--blue)}.global-menu button.active{color:var(--blue);font-weight:650;border-color:var(--blue)}.global-menu .menu-text{display:flex;align-items:center;color:#344154;font-size:13px}.global-menu .arrow{font-size:11px;color:#98a4b2;margin-left:3px}.analysis-menu{position:relative;display:flex;align-items:stretch}.analysis-dropdown{display:none;position:absolute;top:53px;right:-12px;width:132px;padding:6px;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 22px rgba(18,32,50,.16);z-index:20}.analysis-dropdown.open{display:block}.analysis-dropdown button{width:100%;height:32px;border:0;border-radius:4px;background:#fff;color:#344154;text-align:left;padding:0 10px;font-size:13px}.analysis-dropdown button:hover,.analysis-dropdown button.active{background:var(--blue-soft);color:var(--blue);font-weight:650}.top-right{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}.nav{background:#fff;padding:0 28px;display:flex;gap:28px;border-bottom:1px solid var(--line)}.nav button{border:0;background:transparent;padding:12px 0 10px;color:var(--muted);border-bottom:2px solid transparent}.nav button.active{color:var(--blue);font-weight:650;border-color:var(--blue)}
     .page{padding:24px 28px 52px}.filter{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;align-items:start;gap:14px;flex-wrap:wrap}.field{display:grid;grid-template-rows:17px auto;gap:5px}.field label{font-size:11px;color:var(--muted)}.control{height:35px;min-width:174px;border:1px solid #d9e1e8;border-radius:5px;background:#fff;padding:0 10px;color:var(--ink)}.period-picker{position:relative}.calendar-trigger{width:174px;text-align:left;display:flex;align-items:center;justify-content:space-between}.period-popover{display:none;position:absolute;z-index:30;top:41px;left:0;width:288px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;box-shadow:0 10px 25px rgba(19,35,54,.17)}.period-popover.open{display:block}.period-picker-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-weight:650}.period-picker-head button{border:0;background:transparent;color:var(--blue);font-size:12px}.month-grid,.quarter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.month-grid button,.quarter-grid button{height:31px;border:1px solid transparent;border-radius:4px;background:#fff;color:#a7b0bb;font-size:12px}.month-grid button.available,.quarter-grid button.available{color:#334155;background:#f7f9fb;border-color:#edf1f5}.month-grid button.available:hover,.quarter-grid button.available:hover{border-color:#91bdf0;color:var(--blue)}.month-grid button.selected,.quarter-grid button.selected{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:650}.radio-group{height:35px;border:1px solid #d9e1e8;border-radius:5px;display:flex;overflow:hidden}.radio{border:0;background:#fff;color:var(--muted);padding:0 14px}.radio.selected{background:var(--blue-soft);color:var(--blue);font-weight:650}.store-field{min-width:560px;flex:1}.store-control{min-height:35px;border:1px solid #d9e1e8;border-radius:5px;background:#fff;padding:4px 7px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}.store-chips{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.store-search{height:25px;min-width:170px;flex:1;border:0;border-left:1px solid var(--line);background:#fff;color:#536174;padding:0 8px;outline:0}.chip{display:flex;align-items:center;gap:5px;background:var(--blue-soft);color:#315c91;border-radius:4px;padding:2px 6px;font-size:12px}.chip button{border:0;background:transparent;color:#4777b4;padding:0;font-size:15px;line-height:1}.hint,.filter-notes{font-size:11px;color:var(--muted)}.filter-notes{display:flex;gap:15px;flex-wrap:wrap;line-height:1.5;flex-basis:100%;margin-left:0;margin-top:-5px}.filter-actions{display:flex;gap:8px;align-items:center;height:57px;padding-top:22px}.btn{height:35px;border:1px solid #d8e0e8;border-radius:5px;background:#fff;color:#344154;padding:0 13px;font-weight:550}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn:hover{filter:brightness(.98)}
@@ -14,58 +36,533 @@
     .basic{grid-template-columns:repeat(4,1fr)}.basic-item:nth-child(6n){border-right:1px solid var(--line)}.basic-item:nth-child(4n){border-right:0}.basic-item:nth-child(n+7){border-top:0}.basic-item:nth-child(n+5){border-top:1px solid var(--line)}
     @media(max-width:980px){.basic{grid-template-columns:repeat(3,1fr)}.basic-item:nth-child(4n){border-right:1px solid var(--line)}.basic-item:nth-child(3n){border-right:0}.basic-item:nth-child(n+5){border-top:0}.basic-item:nth-child(n+4){border-top:1px solid var(--line)}.kpi-grid{grid-template-columns:repeat(2,1fr)}.line-grid{grid-template-columns:repeat(3,1fr)}.line-item:nth-child(3){border-right:0}.doc-grid{grid-template-columns:1fr}.doc-nav{position:static}.page{padding:18px}}@media(max-width:620px){.top,.nav{padding-left:16px;padding-right:16px}.page{padding:14px}.store-field{min-width:100%;width:100%}.store-search{border-left:0;border-top:1px solid var(--line);width:100%;flex:none}.basic{grid-template-columns:repeat(2,1fr)}.basic-item:nth-child(3n){border-right:1px solid var(--line)}.basic-item:nth-child(2n){border-right:0}.basic-item:nth-child(n+4){border-top:0}.basic-item:nth-child(n+3){border-top:1px solid var(--line)}.report-head{display:block}.report-head>div:last-child{margin-top:8px}.line-grid{grid-template-columns:1fr 1fr}.line-item{border-bottom:1px solid var(--line)}.top-right{display:none}}
     .basic{grid-template-columns:repeat(6,1fr);padding:12px 18px;gap:8px}.basic-item,.basic-item:nth-child(n){border:1px solid var(--line);border-radius:6px;padding:9px 11px}.basic-item:nth-child(n+5){border-top:1px solid var(--line)}@media(max-width:980px){.basic{grid-template-columns:repeat(2,1fr)}.basic-item:nth-child(n){border:1px solid var(--line)}}
-  </style>
-  <style>
-    .score-deal-layout{display:grid;grid-template-columns:minmax(340px,.8fr) minmax(0,1.5fr);gap:12px;align-items:start}.score-deal-layout .section{height:100%}.score-visual{padding:16px 14px 13px}.score-bar-row{display:grid;grid-template-columns:88px minmax(80px,1fr) 44px 44px;gap:8px;align-items:center;margin:0 0 12px;font-size:12px}.score-bar-row .track{height:8px;border-radius:99px;background:#edf1f5;overflow:hidden}.score-bar-row .bar{display:block;height:100%;border-radius:inherit;background:var(--blue)}.score-bar-row b{text-align:right}.score-bar-row em{font-style:normal;text-align:right;color:var(--muted)}.process-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px}.process-table th,.process-table td{padding:9px 8px;border-top:1px solid var(--line);text-align:right}.process-table th:first-child,.process-table td:first-child{text-align:left}.process-table th{background:#f7f9fb;color:var(--muted);font-weight:550}.funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:17px 26px 12px;align-items:end}.funnel-step{text-align:center;display:flex;flex-direction:column;justify-content:end;min-height:104px}.funnel-step b{font-size:22px;line-height:1.1;margin-bottom:9px}.funnel-step i{display:block;width:100%;background:#9fc3f0;border-radius:6px 6px 0 0;min-height:30px}.funnel-step:last-child i{background:var(--blue)}.funnel-step span{font-size:12px;color:var(--muted);margin-top:6px}.funnel-step:nth-child(1) i{height:76px}.funnel-step:nth-child(2) i{height:53px}.funnel-step:nth-child(3) i{height:30px}.score-deal-layout .scroll{border-top:1px solid var(--line)}@media(max-width:980px){.score-deal-layout{grid-template-columns:1fr}.funnel{padding-left:18px;padding-right:18px}}@media(max-width:620px){.score-bar-row{grid-template-columns:78px 1fr 40px}.score-bar-row em{display:none}.funnel{gap:9px}.funnel-step b{font-size:18px}}
-  </style>
-  <style>
-    .score-visual.score-visual-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}.score-bars{padding-top:2px}.score-visual-split .process-table{margin-top:0}.score-visual-split .process-table th,.score-visual-split .process-table td{padding:8px}.score-visual-split .score-bar-row{grid-template-columns:100px minmax(80px,1fr) 44px 44px}@media(max-width:980px){.score-visual.score-visual-split{grid-template-columns:1fr}.score-visual-split .process-table{margin-top:8px}}
-  </style>
-  <style>
-    .score-visual.score-visual-split{align-items:stretch}.score-bars{display:flex;flex-direction:column;align-self:stretch}.score-bar-head{display:grid;grid-template-columns:100px minmax(80px,1fr) 44px 44px;gap:8px;min-height:47px;align-items:center;padding:0 0 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:550}.score-bar-head b,.score-bar-head em{text-align:right;font-style:normal;white-space:nowrap}.score-visual-split .score-bar-row{flex:1;margin:0;padding:9px 0;border-bottom:1px solid var(--line)}.score-visual-split .score-bar-row:last-child{border-bottom:0}@media(max-width:620px){.score-bar-head{grid-template-columns:78px 1fr 40px}.score-bar-head em{display:none}}
-  </style>
-  <style>
-    .score-visual-split .score-bar-row .track{height:15px;display:grid;grid-template-rows:repeat(2,6px);gap:3px;background:transparent;overflow:visible}.score-visual-split .score-bar-row .bar{height:6px;background:var(--blue)}.score-visual-split .score-bar-row .peer-bar{background:#e99a3e}.score-bar-head b::before,.score-bar-head em::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin:0 4px 1px 0}.score-bar-head b::before{background:var(--blue)}.score-bar-head em::before{background:#e99a3e}
-  </style>
-  <style>
-    .score-visual-split .score-bars,.score-visual-split .process-chart{display:flex;flex-direction:column;min-width:0}.score-visual-split .score-bar-head,.score-visual-split .process-chart-head{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;min-height:47px;padding:0;border-bottom:1px solid var(--line)}.chart-legend{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted);white-space:nowrap}.chart-legend span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 5px 1px 0}.chart-legend .legend-store::before{background:var(--blue)}.chart-legend .legend-peer::before{background:#e99a3e}.score-visual-split .score-bar-row,.score-visual-split .process-chart-row{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;align-items:center;flex:1;padding:9px 0;border-bottom:1px solid var(--line)}.score-visual-split .score-bar-row:last-child,.score-visual-split .process-chart-row:last-child{border-bottom:0}.score-visual-split .score-bar-row>span:first-child,.process-chart-name{font-size:12px;color:var(--ink)}.score-visual-split .score-bar-row b,.score-visual-split .score-bar-row em{display:none}.score-visual-split .track,.score-visual-split .process-track{height:20px;display:grid;grid-template-rows:repeat(2,8px);gap:4px;background:transparent;overflow:visible}.score-visual-split .track .bar,.score-visual-split .process-track .bar{position:relative;height:8px;border-radius:99px;background:var(--blue)}.score-visual-split .track .peer-bar,.score-visual-split .process-track .peer-bar{background:#e99a3e}.score-visual-split .track .bar::after,.score-visual-split .process-track .bar::after{content:attr(data-value);position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);font-size:11px;font-weight:650;color:var(--ink);white-space:nowrap}.process-chart-name{display:flex;flex-direction:column;gap:4px}.process-chart-name .tag{width:max-content;padding:1px 5px;font-size:10px}@media(max-width:620px){.score-visual-split .score-bar-head,.score-visual-split .process-chart-head,.score-visual-split .score-bar-row,.score-visual-split .process-chart-row{grid-template-columns:94px minmax(0,1fr);gap:7px}.chart-legend{gap:7px;font-size:11px}}
-  </style>
-  <style>
-    .score-visual-split .score-bar-row .track,.score-visual-split .process-track{height:22px;grid-template-rows:repeat(2,8px);gap:6px}.score-visual-split .bar,.score-visual-split .bar::after{font-style:normal}
-  </style>
-  <style>
-    .score-visual-split .score-bar-head>span:first-child,.score-visual-split .process-chart-head>span:first-child{font-size:12px;font-weight:650;color:var(--ink);white-space:nowrap}
-  </style>
-  <style>
-    .score-visual-split .score-bar-head,.score-visual-split .process-chart-head{align-items:center}
-  </style>
-  <style>
-    .score-visual-split .score-bar-head,.score-visual-split .process-chart-head{grid-template-columns:1fr}.score-visual-split .score-bar-head>span:first-child,.score-visual-split .process-chart-head>span:first-child{display:none}.score-visual-split .chart-legend{width:100%;justify-content:center}.chart-legend .legend-period{font-weight:650;color:var(--ink);margin-right:10px}.data-table .selected-period{background:#f0f6ff!important}
-  </style>
-  <style>
-    .data-table th.target{background:#edf8f3!important}
-  </style>
-  <style>
-    .app{margin-top:14px}.top{width:calc(100% - 56px);margin:0 auto;border:1px solid var(--line);border-radius:8px}.app.doc-mode .top{display:none}
-  </style>
-  <style>
-    .field.required>label::after{content:" *";color:var(--red);font-weight:650}
-  </style>
-  <style>
-    .view-switch{height:46px;display:flex;align-items:stretch;gap:28px;padding:0 28px;background:#fff;border-bottom:1px solid var(--line)}.view-switch button{height:46px;border:0;border-bottom:2px solid transparent;background:#fff;color:#697688;padding:0 3px;font-size:13px}.view-switch button.active{border-color:var(--blue);color:var(--blue);font-weight:650}.doc-content{max-width:1120px}.doc-content h4{margin:22px 0 8px;font-size:14px}.prd-callout{margin:10px 0 16px;padding:10px 12px;border:1px solid #d7e7fb;background:#f6faff;border-radius:6px;color:#315c91;font-size:12px}.logic-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}.logic-list li{padding:9px 10px;border:1px solid var(--line);border-radius:5px;color:#536174;font-size:12px}.logic-list b{color:var(--ink)}.metric-logic-scroll{overflow-x:auto}.metric-logic-table{table-layout:fixed;min-width:1200px}.metric-logic-table th:first-child,.metric-logic-table td:first-child{width:66px}.metric-logic-table th:nth-child(2),.metric-logic-table td:nth-child(2){width:245px;white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
-  </style>
-  <style>
-    /* 易知翼品牌标识：按参考图重绘为蓝橙图形与深灰字标 */
+
+
+    /* Layer 02 */
+.score-deal-layout{display:grid;grid-template-columns:minmax(340px,.8fr) minmax(0,1.5fr);gap:12px;align-items:start}.score-deal-layout .section{height:100%}.score-visual{padding:16px 14px 13px}.score-bar-row{display:grid;grid-template-columns:88px minmax(80px,1fr) 44px 44px;gap:8px;align-items:center;margin:0 0 12px;font-size:12px}.score-bar-row .track{height:8px;border-radius:99px;background:#edf1f5;overflow:hidden}.score-bar-row .bar{display:block;height:100%;border-radius:inherit;background:var(--blue)}.score-bar-row b{text-align:right}.score-bar-row em{font-style:normal;text-align:right;color:var(--muted)}.process-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px}.process-table th,.process-table td{padding:9px 8px;border-top:1px solid var(--line);text-align:right}.process-table th:first-child,.process-table td:first-child{text-align:left}.process-table th{background:#f7f9fb;color:var(--muted);font-weight:550}.funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:17px 26px 12px;align-items:end}.funnel-step{text-align:center;display:flex;flex-direction:column;justify-content:end;min-height:104px}.funnel-step b{font-size:22px;line-height:1.1;margin-bottom:9px}.funnel-step i{display:block;width:100%;background:#9fc3f0;border-radius:6px 6px 0 0;min-height:30px}.funnel-step:last-child i{background:var(--blue)}.funnel-step span{font-size:12px;color:var(--muted);margin-top:6px}.funnel-step:nth-child(1) i{height:76px}.funnel-step:nth-child(2) i{height:53px}.funnel-step:nth-child(3) i{height:30px}.score-deal-layout .scroll{border-top:1px solid var(--line)}@media(max-width:980px){.score-deal-layout{grid-template-columns:1fr}.funnel{padding-left:18px;padding-right:18px}}@media(max-width:620px){.score-bar-row{grid-template-columns:78px 1fr 40px}.score-bar-row em{display:none}.funnel{gap:9px}.funnel-step b{font-size:18px}}
+
+
+    /* Layer 03 */
+.score-visual.score-visual-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}.score-bars{padding-top:2px}.score-visual-split .process-table{margin-top:0}.score-visual-split .process-table th,.score-visual-split .process-table td{padding:8px}.score-visual-split .score-bar-row{grid-template-columns:100px minmax(80px,1fr) 44px 44px}@media(max-width:980px){.score-visual.score-visual-split{grid-template-columns:1fr}.score-visual-split .process-table{margin-top:8px}}
+
+
+    /* Layer 04 */
+.score-visual.score-visual-split{align-items:stretch}.score-bars{display:flex;flex-direction:column;align-self:stretch}.score-bar-head{display:grid;grid-template-columns:100px minmax(80px,1fr) 44px 44px;gap:8px;min-height:47px;align-items:center;padding:0 0 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:550}.score-bar-head b,.score-bar-head em{text-align:right;font-style:normal;white-space:nowrap}.score-visual-split .score-bar-row{flex:1;margin:0;padding:9px 0;border-bottom:1px solid var(--line)}.score-visual-split .score-bar-row:last-child{border-bottom:0}@media(max-width:620px){.score-bar-head{grid-template-columns:78px 1fr 40px}.score-bar-head em{display:none}}
+
+
+    /* Layer 05 */
+.score-visual-split .score-bar-row .track{height:15px;display:grid;grid-template-rows:repeat(2,6px);gap:3px;background:transparent;overflow:visible}.score-visual-split .score-bar-row .bar{height:6px;background:var(--blue)}.score-visual-split .score-bar-row .peer-bar{background:#e99a3e}.score-bar-head b::before,.score-bar-head em::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin:0 4px 1px 0}.score-bar-head b::before{background:var(--blue)}.score-bar-head em::before{background:#e99a3e}
+
+
+    /* Layer 06 */
+.score-visual-split .score-bars,.score-visual-split .process-chart{display:flex;flex-direction:column;min-width:0}.score-visual-split .score-bar-head,.score-visual-split .process-chart-head{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;min-height:47px;padding:0;border-bottom:1px solid var(--line)}.chart-legend{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted);white-space:nowrap}.chart-legend span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 5px 1px 0}.chart-legend .legend-store::before{background:var(--blue)}.chart-legend .legend-peer::before{background:#e99a3e}.score-visual-split .score-bar-row,.score-visual-split .process-chart-row{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;align-items:center;flex:1;padding:9px 0;border-bottom:1px solid var(--line)}.score-visual-split .score-bar-row:last-child,.score-visual-split .process-chart-row:last-child{border-bottom:0}.score-visual-split .score-bar-row>span:first-child,.process-chart-name{font-size:12px;color:var(--ink)}.score-visual-split .score-bar-row b,.score-visual-split .score-bar-row em{display:none}.score-visual-split .track,.score-visual-split .process-track{height:20px;display:grid;grid-template-rows:repeat(2,8px);gap:4px;background:transparent;overflow:visible}.score-visual-split .track .bar,.score-visual-split .process-track .bar{position:relative;height:8px;border-radius:99px;background:var(--blue)}.score-visual-split .track .peer-bar,.score-visual-split .process-track .peer-bar{background:#e99a3e}.score-visual-split .track .bar::after,.score-visual-split .process-track .bar::after{content:attr(data-value);position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);font-size:11px;font-weight:650;color:var(--ink);white-space:nowrap}.process-chart-name{display:flex;flex-direction:column;gap:4px}.process-chart-name .tag{width:max-content;padding:1px 5px;font-size:10px}@media(max-width:620px){.score-visual-split .score-bar-head,.score-visual-split .process-chart-head,.score-visual-split .score-bar-row,.score-visual-split .process-chart-row{grid-template-columns:94px minmax(0,1fr);gap:7px}.chart-legend{gap:7px;font-size:11px}}
+
+
+    /* Layer 07 */
+.score-visual-split .score-bar-row .track,.score-visual-split .process-track{height:22px;grid-template-rows:repeat(2,8px);gap:6px}.score-visual-split .bar,.score-visual-split .bar::after{font-style:normal}
+
+
+    /* Layer 08 */
+.score-visual-split .score-bar-head>span:first-child,.score-visual-split .process-chart-head>span:first-child{font-size:12px;font-weight:650;color:var(--ink);white-space:nowrap}
+
+
+    /* Layer 09 */
+.score-visual-split .score-bar-head,.score-visual-split .process-chart-head{align-items:center}
+
+
+    /* Layer 10 */
+.score-visual-split .score-bar-head,.score-visual-split .process-chart-head{grid-template-columns:1fr}.score-visual-split .score-bar-head>span:first-child,.score-visual-split .process-chart-head>span:first-child{display:none}.score-visual-split .chart-legend{width:100%;justify-content:center}.chart-legend .legend-period{font-weight:650;color:var(--ink);margin-right:10px}.data-table .selected-period{background:#f0f6ff!important}
+
+
+    /* Layer 11 */
+.data-table th.target{background:#edf8f3!important}
+
+
+    /* Layer 12 */
+.app{margin-top:14px}.top{width:calc(100% - 56px);margin:0 auto;border:1px solid var(--line);border-radius:8px}.app.doc-mode .top{display:none}
+
+
+    /* Layer 13 */
+.field.required>label::after{content:" *";color:var(--red);font-weight:650}
+
+
+    /* Layer 14 */
+.view-switch{height:46px;display:flex;align-items:stretch;gap:28px;padding:0 28px;background:#fff;border-bottom:1px solid var(--line)}.view-switch button{height:46px;border:0;border-bottom:2px solid transparent;background:#fff;color:#697688;padding:0 3px;font-size:13px}.view-switch button.active{border-color:var(--blue);color:var(--blue);font-weight:650}.doc-content{max-width:1120px}.doc-content h4{margin:22px 0 8px;font-size:14px}.prd-callout{margin:10px 0 16px;padding:10px 12px;border:1px solid #d7e7fb;background:#f6faff;border-radius:6px;color:#315c91;font-size:12px}.logic-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}.logic-list li{padding:9px 10px;border:1px solid var(--line);border-radius:5px;color:#536174;font-size:12px}.logic-list b{color:var(--ink)}.metric-logic-scroll{overflow-x:auto}.metric-logic-table{table-layout:fixed;min-width:1200px}.metric-logic-table th:first-child,.metric-logic-table td:first-child{width:66px}.metric-logic-table th:nth-child(2),.metric-logic-table td:nth-child(2){width:245px;white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
+
+
+    /* Layer 15 */
+/* 易知翼品牌标识：按参考图重绘为蓝橙图形与深灰字标 */
     .top .brand{gap:9px;font-size:25px;font-weight:750;letter-spacing:0;color:#24272b;line-height:1}
     .top .mark{width:39px;height:39px;flex:0 0 39px}
     .top .mark:before{left:0;top:0;width:39px;height:39px;border-radius:0;background:linear-gradient(90deg,#47d6ed 0 48%,transparent 48% 57%,#2875ed 57% 100%);clip-path:polygon(0 0,69% 0,91% 11%,100% 27%,100% 47%,88% 60%,100% 73%,100% 90%,91% 100%,74% 100%,56% 88%,56% 69%,71% 69%,71% 55%,56% 55%,56% 43%,71% 43%,71% 29%,56% 29%,56% 15%,0 15%)}
     .top .mark:after{right:auto;left:12px;bottom:0;width:10px;height:10px;border-radius:0 0 2px 2px;background:#ff8d3a;transform:none}
-  </style>
-  <style>
-    /* 使用用户提供的易知翼原始字标，避免 CSS 重绘产生差异 */
+
+
+    /* Layer 16 */
+/* 使用用户提供的易知翼原始字标，避免 CSS 重绘产生差异 */
     .top .brand{gap:0;font-size:0}
     .top .mark{width:156px;height:40px;flex:0 0 156px;background:center/153px 40px no-repeat url("data:image/png;base64,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")}
     .top .mark:before,.top .mark:after{display:none}
+
+
+    /* Layer 17 */
+/*
+      Ant Design component standardization.
+      Preserve the existing page visual language while using one shared
+      token set for navigation, form controls, cards, tables and feedback.
+    */
+    :root{
+      --ant-font-family:-apple-system,"SF Pro Text","PingFang SC","Noto Sans SC",sans-serif;
+      --ant-font-size:14px;--ant-font-size-sm:12px;
+      --ant-color-text:var(--ink);--ant-color-text-secondary:var(--muted);
+      --ant-color-primary:var(--blue);--ant-color-primary-bg:var(--blue-soft);
+      --ant-color-success:var(--green);--ant-color-success-bg:var(--green-soft);
+      --ant-color-warning:var(--amber);--ant-color-warning-bg:var(--amber-soft);
+      --ant-color-error:var(--red);--ant-color-error-bg:var(--red-soft);
+      --ant-color-border:var(--line);--ant-color-bg-container:var(--panel);
+      --ant-border-radius:6px;--ant-border-radius-lg:8px;
+      --ant-control-height:35px;--ant-control-outline:0 0 0 2px rgba(25,107,216,.14);
+      --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;
+    }
+    body{font-family:var(--ant-font-family);font-size:var(--ant-font-size);text-rendering:optimizeLegibility}
+    .btn,.control,.radio-group,.store-control,.period-popover,.section,.filter,.doc-nav,.doc-content{
+      transition:border-color .18s,box-shadow .18s,background .18s,color .18s;
+    }
+    .btn,.control,.radio-group,.store-control{min-height:var(--ant-control-height);border-radius:var(--ant-border-radius)}
+    .filter,.doc-nav,.doc-content,.section,.period-popover{border-color:var(--ant-color-border)}
+    .filter,.doc-nav,.doc-content,.section{border-radius:var(--ant-border-radius-lg)}
+    .btn:focus-visible,.radio:focus-visible,.global-menu button:focus-visible,.nav button:focus-visible,
+    .view-switch button:focus-visible,.control:focus-visible,.store-search:focus{
+      outline:none;box-shadow:var(--ant-control-outline);border-color:var(--ant-color-primary);
+    }
+    .btn.primary,.month-grid button.selected,.quarter-grid button.selected{background:var(--ant-color-primary);border-color:var(--ant-color-primary)}
+    .radio.selected,.chip{background:var(--ant-color-primary-bg)}
+    .tag.green,.target{background:var(--ant-color-success-bg)}
+    .mini-note{background:var(--ant-color-warning-bg)}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important}}
+
+
+    /* Layer 18 */
+/* 原始 PNG 为透明底图，按其原始 156 × 40 尺寸呈现 */
+    .top .mark{background-color:transparent !important;background-size:156px 40px !important;background-image:url("data:image/png;base64,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") !important}
+
+
+    /* Layer 19 */
+.score-bars .chart-legend,.process-chart .chart-legend{font-weight:400}
+
+
+    /* Layer 20 */
+/* 一级模块标题栏：在原近白底基础上加深一档 */
+    .section-title{background:#eef3f8}
+
+
+    /* Layer 21 */
+/* 经营分双色条收窄，左右图表采用同一轨道宽度 */
+    .score-visual-split .track,.score-visual-split .process-track{width:85%}
+
+
+    /* Layer 22 */
+/* 过程指标名称与状态标签同一行、垂直居中 */
+    .process-chart-name{flex-direction:row;align-items:center;justify-content:space-between;gap:8px;white-space:nowrap}
+    .process-chart-name .tag{margin-left:auto}
+    /* 核心 KPI 已纳入各业务分区，不再单独展示四张卡片 */
+    #reports .report .kpi-grid{display:none}
+    /* 经营分左侧补齐状态标签，与右侧过程指标保持一致 */
+    .score-visual-split .score-chart-name{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;white-space:nowrap;font-size:12px;color:var(--ink)}
+    .score-visual-split .score-chart-name .tag{margin-left:auto;width:max-content;padding:1px 5px;font-size:10px;flex:none}
+
+
+    /* Layer 23 */
+/* 报告横向表格：悬停时突出整行，便于横向扫描 */
+    #reports .data-table tbody tr{transition:background-color .15s ease}
+    #reports .data-table tbody tr:hover>td{background:#f5f8fc !important}
+
+
+    /* Layer 24 */
+/* CPS 表：指标优先阅读，数据列均衡，比较结论保持单行。 */
+    #reports .sections>.section:nth-of-type(4) .data-table{width:100%;min-width:0 !important;table-layout:fixed}
+    #reports .sections>.section:nth-of-type(4) .data-table th,
+    #reports .sections>.section:nth-of-type(4) .data-table td{padding:11px 14px}
+    #reports .sections>.section:nth-of-type(4) .data-table th{white-space:nowrap;line-height:1.35}
+    #reports .sections>.section:nth-of-type(4) .data-table th:first-child,
+    #reports .sections>.section:nth-of-type(4) .data-table td:first-child{width:38%;text-align:left}
+    #reports .sections>.section:nth-of-type(4) .data-table th:nth-child(2),
+    #reports .sections>.section:nth-of-type(4) .data-table th:nth-child(3),
+    #reports .sections>.section:nth-of-type(4) .data-table th:nth-child(4),
+    #reports .sections>.section:nth-of-type(4) .data-table td:nth-child(2),
+    #reports .sections>.section:nth-of-type(4) .data-table td:nth-child(3),
+    #reports .sections>.section:nth-of-type(4) .data-table td:nth-child(4){width:16%;text-align:center}
+    #reports .sections>.section:nth-of-type(4) .data-table th:last-child,
+    #reports .sections>.section:nth-of-type(4) .data-table td:last-child{width:14%;min-width:150px;text-align:center;white-space:nowrap}
+
+
+    /* Layer 25 */
+/* PRD 第 7 节：按取数、计算与校验规则拆为三列，便于逐项核对 */
+    .metric-logic-three-col{table-layout:fixed;min-width:0 !important;max-width:none !important}
+    .metric-logic-three-col th:nth-child(1),.metric-logic-three-col td:nth-child(1){width:23%}
+    .metric-logic-three-col th:nth-child(2),.metric-logic-three-col td:nth-child(2){width:46%}
+    .metric-logic-three-col th:nth-child(3),.metric-logic-three-col td:nth-child(3){width:31%}
+    .metric-logic-three-col td{vertical-align:top;line-height:1.65}
+    .metric-logic-three-col .logic-module{display:inline-block;margin-right:8px;padding:2px 5px;border-radius:3px;color:#334155;font-weight:650;line-height:1.25}
+    .metric-logic-three-col .logic-module[data-module="基础信息"]{background:#eaf2ff}
+    .metric-logic-three-col .logic-module[data-module="线索"]{background:#eaf7f1}
+    .metric-logic-three-col .logic-module[data-module="经营分"]{background:#f2edff}
+    .metric-logic-three-col .logic-module[data-module="成交转化"]{background:#fff2e4}
+    .metric-logic-three-col .logic-module[data-module="CPS"]{background:#fff0f0}
+    .metric-logic-three-col .logic-period{display:block}
+    .metric-logic-three-col .logic-period + .logic-period{margin-top:5px}
+    .metric-logic-three-col .logic-period b{display:inline;color:#536174}
+    .metric-logic-three-col .logic-rule{color:#c65c4b}
+
+
+    /* Layer 26 */
+/* PRD 文档：正文可直接编辑，编辑时仍维持原有阅读版式 */
+    #doc .doc-content[contenteditable="true"]{cursor:text}
+    #doc .doc-content[contenteditable="true"] :is(p,td,th,li,h2,h3,h4):focus{outline:2px solid #cfe0f7;outline-offset:2px;border-radius:2px}
+    .doc-edit-tip{margin:-3px 0 18px;color:#718096;font-size:12px}
+    .doc-edit-tip span{display:inline-flex;align-items:center;padding:3px 8px;border-radius:4px;background:#edf5ff;color:#2d6fbd}
+
+
+    /* Layer 27 */
+/* 第 7 节三列表：支持输入和拖动调整列宽、表格总宽度 */
+    .metric-logic-layout-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 8px;padding:8px 10px;background:#f7f9fc;border:1px solid #e4eaf2;border-radius:6px;color:#627187;font-size:12px}
+    .metric-logic-layout-toolbar strong{color:#3e4d62;font-size:12px}
+    .metric-logic-layout-toolbar label{display:flex;align-items:center;gap:4px;white-space:nowrap}
+    .metric-logic-layout-toolbar input{width:62px;height:26px;padding:2px 6px;border:1px solid #cad5e2;border-radius:4px;background:#fff;color:#334155;font:inherit}
+    .metric-logic-layout-toolbar button{height:26px;padding:0 8px;border:1px solid #cad5e2;border-radius:4px;background:#fff;color:#3e6fba;font:inherit;cursor:pointer}
+    .metric-logic-layout-toolbar .layout-tip{width:100%;color:#8794a6}
+    .metric-logic-scroll{position:relative;padding-bottom:12px}
+    .metric-logic-three-col th{position:relative}
+    .metric-col-resizer{position:absolute;z-index:3;top:0;right:-4px;width:8px;height:100%;cursor:col-resize;user-select:none}
+    .metric-col-resizer::after{content:"";position:absolute;top:10px;bottom:10px;left:3px;width:1px;background:transparent;transition:background .15s}
+    .metric-col-resizer:hover::after,.metric-col-resizer.is-dragging::after{background:#2d73d5}
+    .metric-table-resizer{position:absolute;right:0;bottom:0;width:14px;height:14px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 46%,#86a6ce 47%,#86a6ce 55%,transparent 56%,transparent 66%,#86a6ce 67%,#86a6ce 75%,transparent 76%)}
+
+
+    /* Layer 28 */
+/* PRD 编辑格式工具：仅在 PRD 文档视图展示 */
+  #doc .doc-content{color:#111827}
+  #doc .doc-content :is(p,li,td,th,h2,h3,h4,a){color:#111827}
+  .doc-format-toolbar{display:flex;position:sticky;top:54px;z-index:95;align-items:center;flex-wrap:wrap;gap:9px;margin:0 0 14px;padding:8px 10px;border:1px solid #dbe4ef;border-radius:6px;background:#f8fafc;color:#5e6d80;font-size:12px;box-shadow:0 4px 12px rgba(31,54,83,.08)}
+  .doc-format-toolbar strong{color:#394a60;font-size:12px}
+  .doc-format-toolbar label{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+  .doc-format-toolbar input[type="color"]{width:30px;height:24px;padding:2px;border:1px solid #cbd7e5;border-radius:4px;background:#fff;cursor:pointer}
+  .doc-format-toolbar button{height:26px;padding:0 9px;border:1px solid #cbd7e5;border-radius:4px;background:#fff;color:#3b6fb6;font:inherit;cursor:pointer}
+  .doc-format-toolbar button:hover{border-color:#75a7e4;background:#f0f6ff}
+  .doc-color-swatches{display:inline-flex;align-items:center;gap:4px}
+  .doc-color-swatches button{width:18px;height:18px;min-width:18px;padding:0;border-radius:4px;border:1px solid rgba(30,41,59,.18);font-size:0}
+  .doc-color-swatches button:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(30,41,59,.25)}
+  #doc:not(.active) .doc-format-toolbar{display:none}
+  #doc.active .doc-format-toolbar{display:flex !important}
+
+
+    /* Layer 29 */
+/* 顶部导航固定：全局视图切换固定在最上方，业务导航固定在其下方。 */
+  .view-switch{position:sticky;top:0;z-index:90;box-shadow:0 1px 0 rgba(21,39,61,.08)}
+  .prototype .top{position:sticky;top:46px;z-index:80;box-shadow:0 2px 8px rgba(21,39,61,.06)}
+
+
+    /* Layer 30 */
+#doc .doc-content .pending-question-highlight{display:inline;padding:1px 3px;border-radius:3px;background:#fff1a8;color:#9a6700;font-weight:650}
+  #doc .doc-content .same-product-impact{color:#dc2626;font-weight:700}
+
+
+    /* Layer 31 */
+.excel-template-example {
+    margin: 16px 0 24px;
+    overflow: hidden;
+    border: 1px solid #dfe7f1;
+    border-radius: 8px;
+    background: #fff;
+  }
+  .excel-template-example figcaption {
+    padding: 10px 14px;
+    border-bottom: 1px solid #dfe7f1;
+    background: #eef4fb;
+    color: #26384e;
+    font-size: 13px;
+    font-weight: 650;
+  }
+  .excel-template-example a { display: block; }
+  .excel-template-example img {
+    display: block;
+    width: 100%;
+    max-height: 720px;
+    object-fit: contain;
+    object-position: top center;
+    background: #fff;
+    cursor: zoom-in;
+  }
+  #doc-edit-tip {
+    margin: -3px 0 18px;
+  }
+
+
+    /* Layer 32 */
+/* 交付用打印版：使用标准横向纸张分页，不以超长截图压缩成单页。 */
+@media print {
+  html body #doc.active .doc-format-toolbar,
+  html body #doc-format-toolbar,
+  html body .doc-format-toolbar { display: none !important; }
+    @page { size: A3 landscape; margin: 8mm; }
+    html, body { width: auto !important; min-height: 0 !important; background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .view-switch, .toast, .analysis-dropdown, .report-export, .filter-actions,
+    #doc.active .doc-format-toolbar, .metric-logic-layout-toolbar, .metric-col-resizer, .metric-table-resizer,
+    #doc-edit-tip, .doc-nav { display: none !important; }
+    .app, .page { width: 100% !important; max-width: none !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+    .top, .prototype .top { position: static !important; top: auto !important; width: 100% !important; margin: 0 0 7mm !important; box-shadow: none !important; }
+    .prototype, .doc { display: none !important; }
+    .prototype.active, .doc.active { display: block !important; }
+    .filter { margin-bottom: 7mm; break-inside: avoid-page; page-break-inside: avoid; }
+    .report-stack { gap: 7mm !important; margin-top: 0 !important; }
+    .report { box-shadow: none !important; break-inside: auto; page-break-inside: auto; }
+    .report-head, .basic, .kpi-grid, .section-title, .line-grid { break-inside: avoid-page; page-break-inside: avoid; }
+    .section { break-inside: auto; page-break-inside: auto; }
+    /* 经营分可在指标行之间自然分页，避免整块被推到下一页造成上一页大面积留白。 */
+    .score-visual-split { break-inside: auto !important; page-break-inside: auto !important; }
+    .funnel { break-inside: avoid-page; page-break-inside: avoid; }
+    .scroll, .metric-logic-scroll { overflow: visible !important; }
+    .doc-grid { display: block !important; }
+    .doc-content { max-width: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; }
+    .doc-content h2, .doc-content h3, .doc-content h4 { break-after: avoid-page; page-break-after: avoid; }
+    .doc-table, .metric-logic-table { width: 100% !important; min-width: 0 !important; max-width: none !important; table-layout: fixed !important; }
+    .doc-table thead, .metric-logic-table thead { display: table-header-group; }
+    .doc-table tr, .metric-logic-table tr, .data-table tr, .score-table tr { break-inside: avoid; page-break-inside: avoid; }
+    .excel-template-example { break-inside: avoid-page; page-break-inside: avoid; }
+    .excel-template-example img { max-height: none !important; }
+  }
+
+
+    /* Layer 33 */
+/* 成交转化表：将主体与时间拆分为两行，提升列头可读性。 */
+  #reports .sections > .section:nth-child(3) .data-table thead th {
+    white-space: normal;
+    line-height: 1.35;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+
+    /* Layer 34 */
+/* 每个经销商独立报告的顶部品牌标识：采用页面同系浅底深色文字，避免透明白色图在浅底上不可读。 */
+  #reports .report-head .report-actions {
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  #reports .report-head .dealer-brand-slot {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    margin-left: 16px;
+  }
+  #reports .report-head .dealer-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    height: 30px;
+    padding: 0 10px;
+    color: #344154;
+    background: #f5f7fa;
+    border: 1px solid #dbe4ec;
+    border-radius: 5px;
+    box-shadow: none;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  #reports .report-head .dealer-brand-logo::before {
+    content: '';
+    width: 5px;
+    height: 14px;
+    margin-right: 6px;
+    border-radius: 2px;
+    background: #246bce;
+  }
+  #reports .report-head .dealer-brand-logo img { display: none; }
+  #reports .report-source-note {
+    margin: 0 22px 18px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 20px;
+  }
+  @media (max-width: 620px) {
+    #reports .report-head { flex-wrap: wrap; }
+    #reports .report-head .report-actions,
+    #reports .report-head .dealer-brand-slot {
+      margin-top: 8px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+  }
+
+
+    /* Layer 35 */
+/* V2：以“概览—诊断—对标—转化—执行”组织单店报告，保留原有指标与口径。 */
+  #reports .report { scroll-margin-top: 64px; }
+  #reports .v2-report-journey {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 10px 22px;
+    background: #f7faff;
+    border-bottom: 1px solid #dfe7f1;
+  }
+  #reports .v2-journey-copy {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    white-space: nowrap;
+  }
+  #reports .v2-kicker {
+    color: #2468c9;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  #reports .v2-journey-copy strong { color: #334155; font-size: 13px; }
+  #reports .v2-journey-steps {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  #reports .v2-journey-step {
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 5px 8px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  #reports .v2-journey-step:hover { color: #1765c1; background: #edf5ff; }
+  #reports .v2-journey-step.is-active {
+    color: #1765c1;
+    background: #e8f1ff;
+    border-color: #bfd7fb;
+    font-weight: 700;
+  }
+  #reports .v2-overview-kicker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px 8px;
+    color: #334155;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  #reports .v2-overview-kicker small { color: #94a3b8; font-size: 12px; font-weight: 400; }
+  #reports .section[data-v2-index] { scroll-margin-top: 64px; }
+  #reports .section .v2-section-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 21px;
+    height: 21px;
+    margin-right: 7px;
+    border-radius: 5px;
+    background: #dfeafb;
+    color: #2468c9;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: 1px;
+  }
+  .v2-doc-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 14px 0 20px;
+    padding: 12px 14px;
+    border: 1px solid #cfe0fb;
+    border-radius: 7px;
+    background: #f5f9ff;
+    color: #49627f;
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .v2-doc-note b { flex: 0 0 auto; color: #2468c9; }
+  @media (max-width: 900px) {
+    #reports .v2-report-journey { align-items: flex-start; flex-direction: column; }
+    #reports .v2-journey-steps { justify-content: flex-start; }
+  }
+
+
+    /* Layer 36 */
+.page-crumb{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap}
+  .page-crumb .crumb-parent{color:#56657a}.page-crumb .crumb-sep{color:#abb6c4}.page-crumb .crumb-current{color:var(--blue);font-weight:700}
+
+
+    /* Layer 37 */
+.view-switch,
+    #doc,
+    #doc-format-toolbar,
+    .doc-format-toolbar {
+      display: none !important;
+    }
+
+    #prototype {
+      display: block !important;
+    }
+
+    /* 独立产品页不展示 V2 报告内的快捷导航与概览说明。 */
+    #reports .v2-report-journey,
+    #reports .v2-overview-kicker {
+      display: none !important;
+    }
+    /*
+      筛选区标准化：将时间选择组织为一个筛选组，门店选择呈现为
+      Ant Design 多选控件的标签与容量反馈，保留原有控件和查询逻辑。
+    */
+    .filter{align-items:flex-end;gap:16px 18px;padding:18px 20px}
+    .filter-time-group{display:flex;align-items:flex-end;gap:12px;padding-right:0;border-right:0}
+    .filter-time-group .field{flex:0 0 auto}
+    .filter-time-group .calendar-trigger{width:186px}
+    .filter-time-group .radio-group{border-radius:var(--ant-border-radius);box-shadow:inset 0 0 0 1px rgba(0,0,0,.015)}
+    .filter-time-group .radio{min-width:46px}
+    .store-field{min-width:520px}
+    .store-field>label{display:flex;align-items:center;gap:8px}
+    .filter-count{font-size:11px;font-weight:400;color:var(--muted)}
+    .store-control{min-height:36px;padding:4px 8px;border-radius:var(--ant-border-radius)}
+    .store-search{min-height:26px;padding-left:10px}
+    .filter-actions{height:auto;padding-top:0;align-self:flex-end}
+    .filter-notes{margin-top:-1px}
+    .select-arrow{display:inline-block;width:8px;height:8px;border-right:1.5px solid #708094;border-bottom:1.5px solid #708094;transform:rotate(45deg);pointer-events:none}
+    .calendar-trigger .select-arrow{margin:-4px 3px 0 14px}
+    .store-control{gap:7px}
+    .store-control .filter-count{order:2;white-space:nowrap;padding:0 3px;color:#8794a5}
+    .store-search-wrap{position:relative;display:flex;align-items:center;flex:1;min-width:170px;order:3}
+    .store-search-wrap .store-search{width:100%;height:26px;min-width:0;appearance:none;border:0;background:transparent;padding:0 24px 0 5px}
+    .store-search-wrap .select-arrow{position:absolute;right:9px;top:50%;margin-top:-5px}
+    .store-control.store-multi-select{position:relative;align-items:center;gap:0}
+    .store-multi-select .store-search-wrap{position:static;min-width:190px}
+    .store-multi-select .store-search{font:inherit;color:var(--ink);background:transparent!important;box-shadow:none!important}
+    .store-multi-select .store-search::placeholder{color:#8794a5}
+    .store-multi-select:focus-within{border-color:var(--ant-color-primary);box-shadow:var(--ant-control-outline)}
+    .store-multi-select .store-search:focus{border-color:transparent!important;box-shadow:none!important;outline:0}
+    .store-dropdown{display:none;position:absolute;z-index:40;top:calc(100% + 6px);left:-1px;right:-1px;max-height:228px;overflow:auto;padding:4px;background:#fff;border:1px solid #d9e1e8;border-radius:var(--ant-border-radius);box-shadow:0 8px 20px rgba(18,32,50,.16)}
+    .store-dropdown.open{display:block}
+    .store-option{width:100%;min-height:32px;display:flex;align-items:center;gap:8px;border:0;border-radius:4px;background:#fff;padding:6px 10px;text-align:left;color:#344154;font-size:12px}
+    .store-option:hover,.store-option.selected{background:var(--blue-soft);color:var(--blue)}
+    .store-option .store-option-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .store-option .store-check{margin-left:auto;font-size:14px;color:var(--blue);font-weight:700}
+    .store-option-empty{padding:10px;color:var(--muted);font-size:12px}
+    @media(max-width:900px){.filter-time-group{padding-right:0;border-right:0}.store-field{min-width:100%}}
+    @media(max-width:620px){.filter-time-group{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}.filter-time-group .calendar-trigger{width:100%}}
+    /* 多选标签换行时，筛选项从顶部对齐，控件高度只向下扩展。 */
+    .filter{align-items:flex-start}
   </style>
 </head>
 <body>
@@ -86,9 +583,11 @@
     <main class="page">
       <section class="prototype active" id="prototype">
         <section class="filter">
-          <div class="field"><label>统计周期</label><div class="radio-group"><button class="radio selected" data-period="month">月</button><button class="radio" data-period="quarter">季</button></div></div>
-          <div class="field required"><label id="period-label">月份</label><div class="period-picker"><button class="control calendar-trigger" id="period-trigger" aria-expanded="false"><span id="period-value">2026 年 06 月</span><span>⌄</span></button><div class="period-popover" id="period-popover"></div></div></div>
-          <div class="field store-field required"><label>门店（ID + 名称）</label><div class="store-control"><div class="store-chips" id="store-chips"><span class="chip" data-id="3101002846">3101002846 · 上海浦东星耀汽车<button title="移除">×</button></span><span class="chip" data-id="3201001139">3201001139 · 南京星途汽车<button title="移除">×</button></span></div><select class="store-search" id="store-add" aria-label="搜索或选择经销商"><option value="">搜索/选择经销商</option><option value="4403002311">4403002311 · 深圳宝信汽车</option><option value="3301002198">3301002198 · 杭州骏宝汽车</option><option value="5101003490">5101003490 · 成都华星汽车</option><option value="4201001191">4201001191 · 武汉宝悦汽车</option></select></div></div>
+          <div class="filter-time-group" aria-label="统计周期筛选">
+            <div class="field"><label>统计周期</label><div class="radio-group"><button class="radio selected" data-period="month">月</button><button class="radio" data-period="quarter">季</button></div></div>
+            <div class="field required"><label id="period-label">数据周期</label><div class="period-picker"><button class="control calendar-trigger" id="period-trigger" aria-expanded="false"><span id="period-value">2026 年 06 月</span><span class="select-arrow" aria-hidden="true"></span></button><div class="period-popover" id="period-popover"></div></div></div>
+          </div>
+          <div class="field store-field required"><label>门店（ID + 名称）</label><div class="store-control store-multi-select" id="store-control"><div class="store-chips" id="store-chips"><span class="chip" data-id="3101002846">3101002846 · 上海浦东星耀汽车<button title="移除">×</button></span><span class="chip" data-id="3201001139">3201001139 · 南京星途汽车<button title="移除">×</button></span></div><div class="store-search-wrap"><input class="store-search" id="store-add" aria-label="搜索或选择经销商" autocomplete="off" placeholder="搜索/选择经销商"><span class="select-arrow" aria-hidden="true"></span></div><div class="store-dropdown" id="store-dropdown" role="listbox" aria-label="经销商候选项"></div></div></div>
           <div class="filter-actions"><button class="btn primary" id="query">查询</button><span id="clear" hidden aria-hidden="true"></span></div>
           <div class="filter-notes"><span>时间：仅可选择有数据的自然月份或季度</span><span>门店：支持逗号分隔搜索，最多 10 家经销商同时查询</span><span>每个经销商独立生成一页纸，多选后自上而下平铺展示，导出入口位于每个经销商报告的右上角</span></div>
         </section>
@@ -119,7 +618,7 @@
     const tips={lead:'月度取当月有效线索数，环比=本月较上月；季度取季度内有效线索累计值，环比=本季度较上季度。',score:'月度按月度评分规则计算；季度按季度评分规则聚合。比例类指标均以累计分子÷累计分母计算。',deal:'月度成交率=当月成交量÷当月有效线索量；季度成交率=季度累计成交量÷季度累计有效线索量。',cps:'月度任务量取当月下发量；季度取季度累计。完成率、当日单占比均按周期累计分子÷分母计算。'};
     function trend(v){return v.startsWith('-')?'down':'up'} function periodText(){return (periodType==='month'?selectedMonth:selectedQuarter).replaceAll(' ','')}
     function renderPeriodPicker(){const popover=document.getElementById('period-popover');const value=document.getElementById('period-value');const isMonth=periodType==='month';const active=isMonth?selectedMonth:selectedQuarter;value.textContent=active;const allMonths=['01','02','03','04','05','06','07','08','09','10','11','12'];const availableMonths=['04','05','06'];const items=isMonth?allMonths.map(m=>({label:`${m}月`,value:`2026 年 ${m} 月`,available:availableMonths.includes(m)})):[{label:'第一季度',value:'2026 年第一季度',available:true},{label:'第二季度',value:'2026 年第二季度',available:true},{label:'第三季度',value:'2026 年第三季度',available:false},{label:'第四季度',value:'2026 年第四季度',available:false}];const gridClass=isMonth?'month-grid':'quarter-grid';popover.innerHTML=`<div class="period-picker-head"><span>2026 年${isMonth?' · 选择月份':' · 选择季度'}</span><button id="clear-period">清空</button></div><div class="${gridClass}">${items.map(item=>`<button ${item.available?'class="available '+(item.value===active?'selected':'')+'" data-period-value="'+item.value+'"':'disabled'}>${item.label}</button>`).join('')}</div>`;popover.querySelectorAll('[data-period-value]').forEach(button=>button.onclick=()=>{if(isMonth)selectedMonth=button.dataset.periodValue;else selectedQuarter=button.dataset.periodValue;popover.classList.remove('open');document.getElementById('period-trigger').setAttribute('aria-expanded','false');renderPeriodPicker();toast(`已选择 ${button.dataset.periodValue}，请点击查询刷新报告`)});popover.querySelector('#clear-period').onclick=()=>{value.textContent='请选择周期';popover.classList.remove('open');document.getElementById('period-trigger').setAttribute('aria-expanded','false');toast('已清空统计周期')};}
-    function renderChips(){const box=document.getElementById('store-chips');box.innerHTML=selected.map(id=>`<span class="chip" data-id="${id}">${id} · ${stores[id].name}<button title="移除">×</button></span>`).join('')||'<span class="hint">未选择门店</span>';box.querySelectorAll('.chip button').forEach(b=>b.onclick=e=>{selected=selected.filter(x=>x!==e.target.parentElement.dataset.id);renderChips()})}
+    function renderChips(){const box=document.getElementById('store-chips');box.innerHTML=selected.map(id=>`<span class="chip" data-id="${id}">${id} · ${stores[id].name}<button title="移除">×</button></span>`).join('')||'<span class="hint">未选择门店</span>';const count=document.getElementById('store-count');if(count)count.textContent=`已选 ${selected.length}/10`;box.querySelectorAll('.chip button').forEach(b=>b.onclick=e=>{selected=selected.filter(x=>x!==e.target.parentElement.dataset.id);renderChips()})}
     function report(id,index){const s=stores[id],p=periodText(),unit=periodType==='month'?'当月':'本季度';return `<article class="report"><header class="report-head"><div><h2>${p}店效数据报告 - ${s.name}</h2><div class="sub">经销商 ID：${id}　·　数据截点：2026-06-30 23:59　·　模块 ${index+1}</div></div><div><span class="tag ${s.source.includes('待')?'amber':'green'}">● ${s.source}</span></div></header><dl class="basic"><div class="basic-item"><dt>经销商 ID</dt><dd>${id}</dd></div><div class="basic-item"><dt>经销商名称</dt><dd>${s.name}</dd></div><div class="basic-item"><dt>省份</dt><dd>${s.province}</dd></div><div class="basic-item"><dt>城市</dt><dd>${s.city}</dd></div><div class="basic-item"><dt>城市级别</dt><dd>${s.level}</dd></div><div class="basic-item"><dt>会员品牌</dt><dd>${s.brand}</dd></div></dl><div class="kpi-grid"><div class="kpi"><div class="label">本店${unit}线索量</div><div class="value">${s.leads}</div><div class="delta ${trend(s.leadD)}">环比 ${s.leadD}</div></div><div class="kpi"><div class="label">本店${unit}成交量</div><div class="value">${s.deal}</div><div class="delta ${trend(s.dealD)}">环比 ${s.dealD}</div></div><div class="kpi"><div class="label">本店${unit}成交率</div><div class="value">${s.rate}</div><div class="delta ${trend(s.rateD)}">环比 ${s.rateD}</div></div><div class="kpi"><div class="label">商户经营分</div><div class="value">${s.score}</div><div class="delta ${trend(s.scoreD)}">环比 ${s.scoreD}</div></div></div><div class="sections"><section class="section"><div class="section-title"><h3>一、线索相关 <span class="help" data-tip="${tips.lead}">?</span></h3><span>本店与同城同品对标</span></div><div class="line-grid"><div class="line-item"><small>本店${unit}线索量</small><b>${s.leads}</b></div><div class="line-item"><small>本店${unit}线索环比</small><b class="${trend(s.leadD)}">${s.leadD}</b></div><div class="line-item"><small>同城同品${unit}线索量</small><b>${s.peer}</b></div><div class="line-item"><small>同城同品${unit}线索环比</small><b class="${trend(s.peerD)}">${s.peerD}</b></div><div class="line-item"><small>同城同品商家数</small><b>${s.shops} 家</b></div></div></section><section class="section"><div class="section-title"><h3>二、经营分 <span class="help" data-tip="${tips.score}">?</span></h3><span>本店 / 同城同品均值</span></div><table class="score-table"><thead><tr><th>指标</th><th>本店</th><th>同城同品均值</th><th>环比</th></tr></thead><tbody><tr><td>商户经营分（总）</td><td class="focus">${s.score}</td><td>78.1</td><td class="${trend(s.scoreD)}">${s.scoreD}</td></tr><tr><td>活跃分</td><td>88.0</td><td>81.3</td><td class="up">+2.0</td></tr><tr><td>转化分</td><td>76.0</td><td>79.8</td><td class="down">-1.2</td></tr><tr><td>诚信分</td><td>85.0</td><td>77.2</td><td class="up">+1.5</td></tr><tr><td>附加分</td><td>68.0</td><td>64.5</td><td class="up">+0.6</td></tr><tr><td>30min 回访率 / 2天2跟率 / 邀约到店 / 添加微信</td><td>94.2% / 78.5% / 43.8% / 61.4%</td><td>91.6% / 81.0% / 48.9% / 58.3%</td><td>—</td></tr></tbody></table></section><section class="section"><div class="section-title"><h3>三、成交转化 <span class="help" data-tip="${tips.deal}">?</span></h3><span>成交统计来源：${s.source}</span></div><div class="scroll"><table class="data-table" style="min-width:1000px"><thead><tr><th>指标</th><th>本店 M-2</th><th>本店 M-1</th><th class="focus">本店 ${unit}</th><th>同省同城市级别同品</th><th>同品 ${unit}</th><th class="target">本店累计计划</th><th class="target">同省同城市级别累计</th><th class="target">同品累计</th></tr></thead><tbody><tr><td>线索量</td><td>274</td><td>291</td><td class="focus">${s.leads}</td><td>315</td><td>${s.peer}</td><td class="target">1,860</td><td class="target">1,742</td><td class="target">1,784</td></tr><tr><td>成交量</td><td>37</td><td>39</td><td class="focus">${s.deal}</td><td>44</td><td>43</td><td class="target">248</td><td class="target">231</td><td class="target">226</td></tr><tr><td>成交率</td><td>13.5%</td><td>13.4%</td><td class="focus">${s.rate}</td><td>14.0%</td><td>14.0%</td><td class="target">13.3%</td><td class="target">13.3%</td><td class="target">12.7%</td></tr></tbody></table></div></section><section class="section"><div class="section-title"><h3>四、CPS 运营核心指标 <span class="help" data-tip="${tips.cps}">?</span></h3><span>点击指标可下钻至任务/单据明细</span></div><div class="scroll"><table class="data-table" style="min-width:970px"><thead><tr><th>指标</th><th>本店</th><th>同品均值</th><th>环比</th><th>状态</th></tr></thead><tbody><tr><td>总成交当日单（或24h）占比</td><td>86.3%</td><td>84.1%</td><td class="up">+2.2pp</td><td><span class="tag green">达标</span></td></tr><tr><td>厂商回传 / 经销商上报 / 易客补录成交当日单占比</td><td>71.9% / 9.8% / 4.6%</td><td>69.0% / 11.6% / 3.5%</td><td>—</td><td><span class="tag amber">1 项待核验</span></td></tr><tr><td>成交核查任务下发量 / 完成率</td><td>25 / 92.0% (23/25)</td><td>23 / 95.3%</td><td class="down">-3.3pp</td><td><span class="tag red">2 项逾期</span></td></tr><tr><td>成交激励任务下发量 / 完成率</td><td>16 / 87.5% (14/16)</td><td>14 / 90.2%</td><td class="down">-2.7pp</td><td><span class="tag amber">待关注</span></td></tr><tr><td>漏报下发任务量 / 漏报下发成交量（用户量）</td><td>12 / 8</td><td>9 / 6</td><td class="up">+2</td><td><span class="tag amber">待核验</span></td></tr></tbody></table></div><div class="mini-note">说明：源数据、任务状态和数据质量标识应支持下钻至原始明细；本原型展示一页纸汇总状态。</div></section></div></article>`}
     function reportQueryTime(){return new Date().toLocaleString('zh-CN',{hour12:false}).replaceAll('/','-')}
     function applyReportMeta(){const time=reportQueryTime();document.querySelectorAll('#reports .report-head .sub').forEach(node=>node.textContent=`数据查询时间：${time}`);document.querySelectorAll('#reports .report-head .tag').forEach(node=>node.remove());document.querySelectorAll('#reports .section-title h3').forEach(node=>{if(node.firstChild)node.firstChild.textContent=node.firstChild.textContent.replace(/^[一二三四]、/,'').replace('线索相关','线索')});document.querySelectorAll('#reports .section-title > span').forEach(node=>{node.textContent=node.textContent.replace(/[，,]?\s*已核验/g,'');if(['本店与同城同品对标','本店 / 同城同品均值'].includes(node.textContent.trim()))node.remove()})}
@@ -163,112 +662,35 @@
   <script>
     (()=>{const table=document.querySelector('#metric-list + p + table');if(table){table.classList.add('metric-logic-table');const wrap=document.createElement('div');wrap.className='metric-logic-scroll';table.parentNode.insertBefore(wrap,table);wrap.appendChild(table)}})();
   </script>
-  <style>
-    /* 原始 PNG 为透明底图，按其原始 156 × 40 尺寸呈现 */
-    .top .mark{background-color:transparent !important;background-size:156px 40px !important;background-image:url("data:image/png;base64,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") !important}
-  </style>
+  
   <script>
     (()=>{const normalizeChartLegendCopy=()=>{document.querySelectorAll('#reports .chart-legend .legend-store').forEach(node=>{const period=node.textContent.replace(/^本店/,'').replace(/均值/g,'');const next=`本店${period}`;if(next!==node.textContent)node.textContent=next});document.querySelectorAll('#reports .chart-legend .legend-peer').forEach(node=>{const period=node.textContent.replace(/^同城同品/,'').replace(/均值/g,'');const next=`同城同品均值${period}`;if(next!==node.textContent)node.textContent=next})};const reportArea=document.getElementById('reports');if(reportArea)new MutationObserver(normalizeChartLegendCopy).observe(reportArea,{subtree:true,childList:true,characterData:true});normalizeChartLegendCopy()})();
   </script>
-  <style>
-    .score-bars .chart-legend,.process-chart .chart-legend{font-weight:400}
-  </style>
-  <style>
-    /* 一级模块标题栏：在原近白底基础上加深一档 */
-    .section-title{background:#eef3f8}
-  </style>
-  <style>
-    /* 经营分双色条收窄，左右图表采用同一轨道宽度 */
-    .score-visual-split .track,.score-visual-split .process-track{width:85%}
-  </style>
-  <style>
-    /* 过程指标名称与状态标签同一行、垂直居中 */
-    .process-chart-name{flex-direction:row;align-items:center;justify-content:space-between;gap:8px;white-space:nowrap}
-    .process-chart-name .tag{margin-left:auto}
-    /* 核心 KPI 已纳入各业务分区，不再单独展示四张卡片 */
-    #reports .report .kpi-grid{display:none}
-    /* 经营分左侧补齐状态标签，与右侧过程指标保持一致 */
-    .score-visual-split .score-chart-name{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;white-space:nowrap;font-size:12px;color:var(--ink)}
-    .score-visual-split .score-chart-name .tag{margin-left:auto;width:max-content;padding:1px 5px;font-size:10px;flex:none}
-  </style>
-  <style>
-    /* 报告横向表格：悬停时突出整行，便于横向扫描 */
-    #reports .data-table tbody tr{transition:background-color .15s ease}
-    #reports .data-table tbody tr:hover>td{background:#f5f8fc !important}
-  </style>
+  
+  
+  
+  
+  
   <script>
     (()=>{const reportTable=document.querySelector('#report-module + .flow + table');if(reportTable&&!document.getElementById('table-hover-rule'))reportTable.insertAdjacentHTML('afterend','<p id="table-hover-rule">表格交互：鼠标悬停在成交转化、CPS 等横向表格的任一数据行时，整行以浅蓝底高亮，便于横向核对指标。</p>')})();
   </script>
-  <style>
-    /* CPS 表：指标优先阅读，数据列均衡，比较结论保持单行。 */
-    #reports .sections>.section:nth-of-type(4) .data-table{width:100%;min-width:0 !important;table-layout:fixed}
-    #reports .sections>.section:nth-of-type(4) .data-table th,
-    #reports .sections>.section:nth-of-type(4) .data-table td{padding:11px 14px}
-    #reports .sections>.section:nth-of-type(4) .data-table th{white-space:nowrap;line-height:1.35}
-    #reports .sections>.section:nth-of-type(4) .data-table th:first-child,
-    #reports .sections>.section:nth-of-type(4) .data-table td:first-child{width:38%;text-align:left}
-    #reports .sections>.section:nth-of-type(4) .data-table th:nth-child(2),
-    #reports .sections>.section:nth-of-type(4) .data-table th:nth-child(3),
-    #reports .sections>.section:nth-of-type(4) .data-table th:nth-child(4),
-    #reports .sections>.section:nth-of-type(4) .data-table td:nth-child(2),
-    #reports .sections>.section:nth-of-type(4) .data-table td:nth-child(3),
-    #reports .sections>.section:nth-of-type(4) .data-table td:nth-child(4){width:16%;text-align:center}
-    #reports .sections>.section:nth-of-type(4) .data-table th:last-child,
-    #reports .sections>.section:nth-of-type(4) .data-table td:last-child{width:14%;min-width:150px;text-align:center;white-space:nowrap}
-  </style>
+  
   <script>
     /* 原型样例：活跃分与同城同品数值一致时，统一归入“优势”状态。 */
     (()=>{const applyParitySample=()=>document.querySelectorAll('#reports .score-bars .score-bar-row').forEach(row=>{const name=row.querySelector('.score-chart-name>span')?.textContent.trim();if(name!=='活跃分')return;const own=row.querySelector('.bar:not(.peer-bar)'),peer=row.querySelector('.peer-bar'),peerValue=row.querySelector('em'),tag=row.querySelector('.score-chart-name .tag');if(!own||!peer||!peerValue||!tag)return;const value=own.dataset.value||'88.0';peerValue.textContent=value;peer.style.width=own.style.width;peer.dataset.value=value;tag.className='tag green';tag.textContent='优势'});const area=document.getElementById('reports');if(area)new MutationObserver(()=>requestAnimationFrame(applyParitySample)).observe(area,{childList:true,subtree:true});applyParitySample()})();
   </script>
-  <style>
-    /* PRD 第 7 节：按取数、计算与校验规则拆为三列，便于逐项核对 */
-    .metric-logic-three-col{table-layout:fixed;min-width:0 !important;max-width:none !important}
-    .metric-logic-three-col th:nth-child(1),.metric-logic-three-col td:nth-child(1){width:23%}
-    .metric-logic-three-col th:nth-child(2),.metric-logic-three-col td:nth-child(2){width:46%}
-    .metric-logic-three-col th:nth-child(3),.metric-logic-three-col td:nth-child(3){width:31%}
-    .metric-logic-three-col td{vertical-align:top;line-height:1.65}
-    .metric-logic-three-col .logic-module{display:inline-block;margin-right:8px;padding:2px 5px;border-radius:3px;color:#334155;font-weight:650;line-height:1.25}
-    .metric-logic-three-col .logic-module[data-module="基础信息"]{background:#eaf2ff}
-    .metric-logic-three-col .logic-module[data-module="线索"]{background:#eaf7f1}
-    .metric-logic-three-col .logic-module[data-module="经营分"]{background:#f2edff}
-    .metric-logic-three-col .logic-module[data-module="成交转化"]{background:#fff2e4}
-    .metric-logic-three-col .logic-module[data-module="CPS"]{background:#fff0f0}
-    .metric-logic-three-col .logic-period{display:block}
-    .metric-logic-three-col .logic-period + .logic-period{margin-top:5px}
-    .metric-logic-three-col .logic-period b{display:inline;color:#536174}
-    .metric-logic-three-col .logic-rule{color:#c65c4b}
-  </style>
+  
   <script>
     (()=>{const source=document.querySelector('#metric-list + p + .metric-logic-scroll .metric-logic-table');if(!source||document.getElementById('metric-logic-three-col'))return;const rules=(module,field)=>{if(module==='基础信息')return '按查询时有效的主数据快照展示；空值显示“—”，且受数据权限控制。';if(module==='线索'){if(field.includes('较上期'))return '月度较上月、季度较上季度；上期值为 0 或无有效数据时显示“—”。';if(field.includes('商家数'))return '仅计入对标范围内有有效数据的经销商；同城同品范围受权限及城市级别配置控制。';if(field.includes('同城同品'))return '对标范围为同城、同品及配置的城市级别；无有效数据对象不纳入聚合。';return '仅统计有效线索记录；无有效记录时按 0 展示。'}if(module==='经营分'){if(/回访率|跟率|开口率/.test(field))return '比例类指标使用有效分子 ÷ 有效分母；季度按累计分子 ÷ 累计分母，不取月均。';return '评分结果由评分规则引擎输出；本店与同城同品均值均保留一位小数。'}if(module==='成交转化'){if(field.includes('M-2')||field.includes('M-1'))return 'M-1、M-2 按所选周期依次前推；跨年自动回溯，无历史周期时显示“—”。';if(field.includes('当年累计'))return '累计范围为所选年份首期至所选周期；表头随所选月份或季度动态更新。';if(field.includes('同省')||field.includes('同品所选'))return '对标仅使用配置范围内有有效数据的门店；比例按汇总分子 ÷ 汇总分母计算。';if(field==='成交率')return '有效线索量为 0 时成交率显示“—”；比例差异以百分点（pp）展示。';return '仅统计有效成交记录；无有效记录时按 0 展示。'}if(module==='CPS'){if(field.includes('完成率'))return '完成率 = 已完成任务量 ÷ 下发任务量；下发量为 0 时显示“—”。';if(field.includes('占比'))return '占比 = 符合条件的成交量 ÷ 总成交量；总成交量为 0 时显示“—”。';if(field.includes('任务'))return '任务状态按达标、临界、待关注、待核验、逾期等标签展示，并支持下钻。';return '按所选周期汇总用户量；季度取季度累计值。'}return '按指标口径展示。'};const rows=[...source.querySelectorAll('tbody tr')].map(row=>{const cells=row.querySelectorAll('td');const module=cells[0]?.textContent.trim()||'';const field=cells[1]?.textContent.trim()||'';const month=cells[2]?.textContent.trim()||'';const quarter=cells[3]?.textContent.trim()||'';return '<tr><td><span class="logic-module">'+module+'</span>'+field+'</td><td><span class="logic-period">月度：'+month+'</span><span class="logic-period">季度：'+quarter+'</span></td><td class="logic-rule">'+rules(module,field)+'</td></tr>'}).join('');const table='<table id="metric-logic-three-col" class="doc-table metric-logic-three-col"><thead><tr><th>字段 / 指标</th><th>取数范围与计算逻辑</th><th>对标、展示与校验规则</th></tr></thead><tbody>'+rows+'</tbody></table>';const wrap=source.closest('.metric-logic-scroll');if(wrap)wrap.outerHTML='<div class="metric-logic-scroll">'+table+'</div>'})();
   </script>
-  <style>
-    /* PRD 文档：正文可直接编辑，编辑时仍维持原有阅读版式 */
-    #doc .doc-content[contenteditable="true"]{cursor:text}
-    #doc .doc-content[contenteditable="true"] :is(p,td,th,li,h2,h3,h4):focus{outline:2px solid #cfe0f7;outline-offset:2px;border-radius:2px}
-    .doc-edit-tip{margin:-3px 0 18px;color:#718096;font-size:12px}
-    .doc-edit-tip span{display:inline-flex;align-items:center;padding:3px 8px;border-radius:4px;background:#edf5ff;color:#2d6fbd}
-  </style>
+  
   <script>
     (()=>{const storageKey='store-effect-prd-v1-editable-document';const resetFlag='store-effect-prd-v2-archive-restored-3';if(!localStorage.getItem(resetFlag)){const saved=localStorage.getItem(storageKey);if(saved)localStorage.setItem(storageKey+'-backup-before-v2-restore',saved);localStorage.removeItem(storageKey);localStorage.setItem(resetFlag,'1')}})();
   </script>
   <script>
     (()=>{const docContent=document.querySelector('#doc .doc-content');if(!docContent)return;const acceptance=document.getElementById('acceptance'),acceptanceList=acceptance?.nextElementSibling;if(acceptance&&acceptanceList?.tagName==='OL'){const rows=[...acceptanceList.querySelectorAll('li')].map((item,index)=>'<tr><td>验收项 '+(index+1)+'</td><td>'+item.innerHTML+'</td></tr>').join('');acceptanceList.outerHTML='<table id="acceptance-table" class="doc-table"><thead><tr><th>验收项</th><th>验收标准</th></tr></thead><tbody>'+rows+'</tbody></table>'}const states=document.getElementById('states'),stateTable=states?.nextElementSibling,permissionHeading=document.getElementById('permission-module'),permissionTable=permissionHeading?.nextElementSibling;if(states&&stateTable?.tagName==='TABLE'&&permissionTable?.tagName==='TABLE'){const stateRows=[...stateTable.querySelectorAll('tbody tr'),...stateTable.querySelectorAll('tr')].filter((row,index,all)=>row.querySelector('td')&&all.indexOf(row)===index).map(row=>'<tr>'+row.innerHTML+'</tr>').join('');const permissionRows=[...permissionTable.querySelectorAll('tr')].filter(row=>row.querySelector('td')).map(row=>'<tr>'+row.innerHTML+'</tr>').join('');stateTable.outerHTML='<table id="permission-merged-table" class="doc-table"><thead><tr><th>管理项</th><th>规则说明</th></tr></thead><tbody>'+stateRows+permissionRows+'</tbody></table>';permissionHeading?.remove();permissionTable?.remove()}const storageKey='store-effect-prd-v1-editable-document';const removeLegacyPrdDownload=()=>{docContent.querySelectorAll('button,a,[role="button"]').forEach(item=>{if(item.textContent.replace(/\s+/g,'').includes('下载当前PRD独立版'))item.remove()})};const saved=localStorage.getItem(storageKey);if(saved)docContent.innerHTML=saved;removeLegacyPrdDownload();localStorage.setItem(storageKey,docContent.innerHTML);new MutationObserver(removeLegacyPrdDownload).observe(docContent,{childList:true,subtree:true});docContent.setAttribute('contenteditable','true');docContent.setAttribute('spellcheck','false');if(!docContent.querySelector('#doc-edit-tip'))docContent.insertAdjacentHTML('afterbegin','<p id="doc-edit-tip" class="doc-edit-tip" contenteditable="false"><span>文档可直接编辑，内容将自动暂存于当前浏览器</span></p>');let timer;docContent.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>localStorage.setItem(storageKey,docContent.innerHTML),300)});document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==='s'&&document.getElementById('doc').classList.contains('active')){event.preventDefault();localStorage.setItem(storageKey,docContent.innerHTML);toast('PRD 编辑内容已暂存')}})})();
   </script>
-  <style>
-    /* 第 7 节三列表：支持输入和拖动调整列宽、表格总宽度 */
-    .metric-logic-layout-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 8px;padding:8px 10px;background:#f7f9fc;border:1px solid #e4eaf2;border-radius:6px;color:#627187;font-size:12px}
-    .metric-logic-layout-toolbar strong{color:#3e4d62;font-size:12px}
-    .metric-logic-layout-toolbar label{display:flex;align-items:center;gap:4px;white-space:nowrap}
-    .metric-logic-layout-toolbar input{width:62px;height:26px;padding:2px 6px;border:1px solid #cad5e2;border-radius:4px;background:#fff;color:#334155;font:inherit}
-    .metric-logic-layout-toolbar button{height:26px;padding:0 8px;border:1px solid #cad5e2;border-radius:4px;background:#fff;color:#3e6fba;font:inherit;cursor:pointer}
-    .metric-logic-layout-toolbar .layout-tip{width:100%;color:#8794a6}
-    .metric-logic-scroll{position:relative;padding-bottom:12px}
-    .metric-logic-three-col th{position:relative}
-    .metric-col-resizer{position:absolute;z-index:3;top:0;right:-4px;width:8px;height:100%;cursor:col-resize;user-select:none}
-    .metric-col-resizer::after{content:"";position:absolute;top:10px;bottom:10px;left:3px;width:1px;background:transparent;transition:background .15s}
-    .metric-col-resizer:hover::after,.metric-col-resizer.is-dragging::after{background:#2d73d5}
-    .metric-table-resizer{position:absolute;right:0;bottom:0;width:14px;height:14px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 46%,#86a6ce 47%,#86a6ce 55%,transparent 56%,transparent 66%,#86a6ce 67%,#86a6ce 75%,transparent 76%)}
-  </style>
+  
   <script>
     (()=>{const table=document.getElementById('metric-logic-three-col');if(!table||document.getElementById('metric-logic-layout-toolbar'))return;const wrapper=table.closest('.metric-logic-scroll');if(!wrapper)return;const storageKey='store-effect-prd-v1-metric-table-layout';const saved=JSON.parse(localStorage.getItem(storageKey)||'null');const headers=[...table.querySelectorAll('thead th')];const baseWidth=Math.round(table.getBoundingClientRect().width);let widths=saved?.columns?.length===3?saved.columns:[Math.round(baseWidth*.23),Math.round(baseWidth*.46),Math.round(baseWidth*.31)];let tableWidth=saved?.width||widths.reduce((sum,value)=>sum+value,0);const colgroup=document.createElement('colgroup');table.prepend(colgroup);const toolbar=document.createElement('div');toolbar.id='metric-logic-layout-toolbar';toolbar.className='metric-logic-layout-toolbar';toolbar.contentEditable='false';toolbar.innerHTML='<strong>表格布局</strong><label>表格宽度 <input id="metric-table-width" type="number" min="900" max="2600" step="10"> px</label><label>第 1 列 <input data-column="0" type="number" min="170" step="10"> px</label><label>第 2 列 <input data-column="1" type="number" min="280" step="10"> px</label><label>第 3 列 <input data-column="2" type="number" min="220" step="10"> px</label><button id="metric-layout-reset" type="button">恢复默认</button><span class="layout-tip">表格宽度始终等于三列宽度之和；可输入数值、拖动分隔线或使用右下角控制点调整。</span>';wrapper.before(toolbar);const inputs=[...toolbar.querySelectorAll('[data-column]')],widthInput=toolbar.querySelector('#metric-table-width');const minWidths=[170,280,220];const persist=()=>localStorage.setItem(storageKey,JSON.stringify({width:tableWidth,columns:widths}));const render=()=>{tableWidth=Math.max(900,widths.reduce((sum,value)=>sum+value,0));table.style.setProperty('width',tableWidth+'px','important');table.style.setProperty('min-width','0','important');table.style.setProperty('max-width','none','important');colgroup.innerHTML=widths.map(width=>'<col style="width:'+width+'px">').join('');widthInput.value=tableWidth;inputs.forEach((input,index)=>input.value=widths[index]);persist()};const reset=()=>{const current=Math.max(1180,Math.round(wrapper.getBoundingClientRect().width));widths=[Math.round(current*.23),Math.round(current*.46),current-Math.round(current*.23)-Math.round(current*.46)];render()};if(saved){tableWidth=Math.max(900,saved.width||tableWidth);const ratio=tableWidth/widths.reduce((sum,value)=>sum+value,0);widths=widths.map(width=>Math.round(width*ratio))}render();widthInput.addEventListener('change',()=>{const target=Math.max(900,Number(widthInput.value)||tableWidth);const ratio=target/widths.reduce((sum,value)=>sum+value,0);widths=widths.map((width,index)=>Math.max(minWidths[index],Math.round(width*ratio)));render()});inputs.forEach((input,index)=>input.addEventListener('change',()=>{widths[index]=Math.max(minWidths[index],Number(input.value)||widths[index]);render()}));toolbar.querySelector('#metric-layout-reset').onclick=()=>{localStorage.removeItem(storageKey);reset()};headers.slice(0,-1).forEach((header,index)=>{const handle=document.createElement('span');handle.className='metric-col-resizer';header.appendChild(handle);handle.addEventListener('pointerdown',event=>{event.preventDefault();handle.setPointerCapture(event.pointerId);handle.classList.add('is-dragging');const startX=event.clientX,startCurrent=widths[index],startNext=widths[index+1];const move=moveEvent=>{const delta=moveEvent.clientX-startX;const current=Math.max(minWidths[index],startCurrent+delta);const next=Math.max(minWidths[index+1],startNext-delta);if(current===minWidths[index]||next===minWidths[index+1])return;widths[index]=current;widths[index+1]=next;render()};const end=()=>{handle.classList.remove('is-dragging');window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',end)};window.addEventListener('pointermove',move);window.addEventListener('pointerup',end)})});const tableHandle=document.createElement('span');tableHandle.className='metric-table-resizer';tableHandle.title='拖动调整表格宽度';wrapper.appendChild(tableHandle);tableHandle.addEventListener('pointerdown',event=>{event.preventDefault();tableHandle.setPointerCapture(event.pointerId);const startX=event.clientX,start=tableWidth;const move=moveEvent=>{const target=Math.max(900,start+moveEvent.clientX-startX);const ratio=target/widths.reduce((sum,value)=>sum+value,0);widths=widths.map((width,index)=>Math.max(minWidths[index],Math.round(width*ratio)));render()};const end=()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',end)};window.addEventListener('pointermove',move);window.addEventListener('pointerup',end)})})();
 </script>
@@ -322,27 +744,8 @@
   })();
 </script>
 <!-- V2 active -->
-<style>
-  /* PRD 编辑格式工具：仅在 PRD 文档视图展示 */
-  #doc .doc-content{color:#111827}
-  #doc .doc-content :is(p,li,td,th,h2,h3,h4,a){color:#111827}
-  .doc-format-toolbar{display:flex;position:sticky;top:54px;z-index:95;align-items:center;flex-wrap:wrap;gap:9px;margin:0 0 14px;padding:8px 10px;border:1px solid #dbe4ef;border-radius:6px;background:#f8fafc;color:#5e6d80;font-size:12px;box-shadow:0 4px 12px rgba(31,54,83,.08)}
-  .doc-format-toolbar strong{color:#394a60;font-size:12px}
-  .doc-format-toolbar label{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
-  .doc-format-toolbar input[type="color"]{width:30px;height:24px;padding:2px;border:1px solid #cbd7e5;border-radius:4px;background:#fff;cursor:pointer}
-  .doc-format-toolbar button{height:26px;padding:0 9px;border:1px solid #cbd7e5;border-radius:4px;background:#fff;color:#3b6fb6;font:inherit;cursor:pointer}
-  .doc-format-toolbar button:hover{border-color:#75a7e4;background:#f0f6ff}
-  .doc-color-swatches{display:inline-flex;align-items:center;gap:4px}
-  .doc-color-swatches button{width:18px;height:18px;min-width:18px;padding:0;border-radius:4px;border:1px solid rgba(30,41,59,.18);font-size:0}
-  .doc-color-swatches button:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(30,41,59,.25)}
-  #doc:not(.active) .doc-format-toolbar{display:none}
-  #doc.active .doc-format-toolbar{display:flex !important}
-</style>
-<style>
-  /* 顶部导航固定：全局视图切换固定在最上方，业务导航固定在其下方。 */
-  .view-switch{position:sticky;top:0;z-index:90;box-shadow:0 1px 0 rgba(21,39,61,.08)}
-  .prototype .top{position:sticky;top:46px;z-index:80;box-shadow:0 2px 8px rgba(21,39,61,.06)}
-</style>
+
+
 <script>
   (() => {
     const docContent = document.querySelector('#doc .doc-content');
@@ -444,10 +847,7 @@
     toolbar.querySelector('#doc-clear-format').addEventListener('click', () => applyFormat('removeFormat'));
   })();
 </script>
-<style>
-  #doc .doc-content .pending-question-highlight{display:inline;padding:1px 3px;border-radius:3px;background:#fff1a8;color:#9a6700;font-weight:650}
-  #doc .doc-content .same-product-impact{color:#dc2626;font-weight:700}
-</style>
+
 <script>
   (() => {
     const content = document.querySelector('#doc .doc-content');
@@ -709,36 +1109,7 @@
     }
   })();
 </script>
-<style>
-  .excel-template-example {
-    margin: 16px 0 24px;
-    overflow: hidden;
-    border: 1px solid #dfe7f1;
-    border-radius: 8px;
-    background: #fff;
-  }
-  .excel-template-example figcaption {
-    padding: 10px 14px;
-    border-bottom: 1px solid #dfe7f1;
-    background: #eef4fb;
-    color: #26384e;
-    font-size: 13px;
-    font-weight: 650;
-  }
-  .excel-template-example a { display: block; }
-  .excel-template-example img {
-    display: block;
-    width: 100%;
-    max-height: 720px;
-    object-fit: contain;
-    object-position: top center;
-    background: #fff;
-    cursor: zoom-in;
-  }
-  #doc-edit-tip {
-    margin: -3px 0 18px;
-  }
-</style>
+
 <script>
   (() => {
     // 在 Excel 字段列项说明后提供与导出模板一致的截图示例，可点击查看原图。
@@ -756,40 +1127,7 @@
       </figure>`);
   })();
 </script>
-<style>
-  /* 交付用打印版：使用标准横向纸张分页，不以超长截图压缩成单页。 */
-@media print {
-  html body #doc.active .doc-format-toolbar,
-  html body #doc-format-toolbar,
-  html body .doc-format-toolbar { display: none !important; }
-    @page { size: A3 landscape; margin: 8mm; }
-    html, body { width: auto !important; min-height: 0 !important; background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .view-switch, .toast, .analysis-dropdown, .report-export, .filter-actions,
-    #doc.active .doc-format-toolbar, .metric-logic-layout-toolbar, .metric-col-resizer, .metric-table-resizer,
-    #doc-edit-tip, .doc-nav { display: none !important; }
-    .app, .page { width: 100% !important; max-width: none !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
-    .top, .prototype .top { position: static !important; top: auto !important; width: 100% !important; margin: 0 0 7mm !important; box-shadow: none !important; }
-    .prototype, .doc { display: none !important; }
-    .prototype.active, .doc.active { display: block !important; }
-    .filter { margin-bottom: 7mm; break-inside: avoid-page; page-break-inside: avoid; }
-    .report-stack { gap: 7mm !important; margin-top: 0 !important; }
-    .report { box-shadow: none !important; break-inside: auto; page-break-inside: auto; }
-    .report-head, .basic, .kpi-grid, .section-title, .line-grid { break-inside: avoid-page; page-break-inside: avoid; }
-    .section { break-inside: auto; page-break-inside: auto; }
-    /* 经营分可在指标行之间自然分页，避免整块被推到下一页造成上一页大面积留白。 */
-    .score-visual-split { break-inside: auto !important; page-break-inside: auto !important; }
-    .funnel { break-inside: avoid-page; page-break-inside: avoid; }
-    .scroll, .metric-logic-scroll { overflow: visible !important; }
-    .doc-grid { display: block !important; }
-    .doc-content { max-width: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; }
-    .doc-content h2, .doc-content h3, .doc-content h4 { break-after: avoid-page; page-break-after: avoid; }
-    .doc-table, .metric-logic-table { width: 100% !important; min-width: 0 !important; max-width: none !important; table-layout: fixed !important; }
-    .doc-table thead, .metric-logic-table thead { display: table-header-group; }
-    .doc-table tr, .metric-logic-table tr, .data-table tr, .score-table tr { break-inside: avoid; page-break-inside: avoid; }
-    .excel-template-example { break-inside: avoid-page; page-break-inside: avoid; }
-    .excel-template-example img { max-height: none !important; }
-  }
-</style>
+
 <script>
   (() => {
     // 供标准 PDF 导出使用：?print=prd 直接切换到 PRD 视图，默认保留报告预览。
@@ -910,15 +1248,7 @@
     applyTwoStatus();
   }());
 </script>
-<style>
-  /* 成交转化表：将主体与时间拆分为两行，提升列头可读性。 */
-  #reports .sections > .section:nth-child(3) .data-table thead th {
-    white-space: normal;
-    line-height: 1.35;
-    text-align: center;
-    vertical-align: middle;
-  }
-</style>
+
 <script>
   (() => {
     const previousApplyConversionHeaderCopy = applyConversionHeaderCopy;
@@ -941,64 +1271,7 @@
     applyConversionHeaderCopy();
   })();
 </script>
-<style>
-  /* 每个经销商独立报告的顶部品牌标识：采用页面同系浅底深色文字，避免透明白色图在浅底上不可读。 */
-  #reports .report-head .report-actions {
-    flex: 0 0 auto;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-  #reports .report-head .dealer-brand-slot {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    gap: 10px;
-    margin-left: 16px;
-  }
-  #reports .report-head .dealer-brand-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    height: 30px;
-    padding: 0 10px;
-    color: #344154;
-    background: #f5f7fa;
-    border: 1px solid #dbe4ec;
-    border-radius: 5px;
-    box-shadow: none;
-    font-size: 12px;
-    font-weight: 650;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  #reports .report-head .dealer-brand-logo::before {
-    content: '';
-    width: 5px;
-    height: 14px;
-    margin-right: 6px;
-    border-radius: 2px;
-    background: #246bce;
-  }
-  #reports .report-head .dealer-brand-logo img { display: none; }
-  #reports .report-source-note {
-    margin: 0 22px 18px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 20px;
-  }
-  @media (max-width: 620px) {
-    #reports .report-head { flex-wrap: wrap; }
-    #reports .report-head .report-actions,
-    #reports .report-head .dealer-brand-slot {
-      margin-top: 8px;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-  }
-</style>
+
 <script>
   (() => {
     const dealerBrandLogo = 'data:image/png;base64,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';
@@ -1026,103 +1299,7 @@
     applyDealerBrandLogo();
   })();
 </script>
-<style>
-  /* V2：以“概览—诊断—对标—转化—执行”组织单店报告，保留原有指标与口径。 */
-  #reports .report { scroll-margin-top: 64px; }
-  #reports .v2-report-journey {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 10px 22px;
-    background: #f7faff;
-    border-bottom: 1px solid #dfe7f1;
-  }
-  #reports .v2-journey-copy {
-    display: flex;
-    align-items: baseline;
-    gap: 9px;
-    white-space: nowrap;
-  }
-  #reports .v2-kicker {
-    color: #2468c9;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .04em;
-  }
-  #reports .v2-journey-copy strong { color: #334155; font-size: 13px; }
-  #reports .v2-journey-steps {
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  #reports .v2-journey-step {
-    appearance: none;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    padding: 5px 8px;
-    background: transparent;
-    color: #64748b;
-    cursor: pointer;
-    font: inherit;
-    font-size: 12px;
-    line-height: 16px;
-  }
-  #reports .v2-journey-step:hover { color: #1765c1; background: #edf5ff; }
-  #reports .v2-journey-step.is-active {
-    color: #1765c1;
-    background: #e8f1ff;
-    border-color: #bfd7fb;
-    font-weight: 700;
-  }
-  #reports .v2-overview-kicker {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 22px 8px;
-    color: #334155;
-    background: #fff;
-    font-size: 14px;
-    font-weight: 700;
-  }
-  #reports .v2-overview-kicker small { color: #94a3b8; font-size: 12px; font-weight: 400; }
-  #reports .section[data-v2-index] { scroll-margin-top: 64px; }
-  #reports .section .v2-section-index {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 21px;
-    height: 21px;
-    margin-right: 7px;
-    border-radius: 5px;
-    background: #dfeafb;
-    color: #2468c9;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1;
-    vertical-align: 1px;
-  }
-  .v2-doc-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin: 14px 0 20px;
-    padding: 12px 14px;
-    border: 1px solid #cfe0fb;
-    border-radius: 7px;
-    background: #f5f9ff;
-    color: #49627f;
-    font-size: 13px;
-    line-height: 20px;
-  }
-  .v2-doc-note b { flex: 0 0 auto; color: #2468c9; }
-  @media (max-width: 900px) {
-    #reports .v2-report-journey { align-items: flex-start; flex-direction: column; }
-    #reports .v2-journey-steps { justify-content: flex-start; }
-  }
-</style>
+
   <script>
     (() => {
       const v2Sections = [
@@ -1147,7 +1324,7 @@
       const title = docContent.querySelector('h1, h2');
       if (title) title.textContent = '店效报告｜PRD 与交互说明 V2';
       const intro = [...docContent.querySelectorAll('p')].find((node) => node.textContent.includes('版本 V1.0'));
-      if (intro) intro.textContent = intro.textContent.replace('版本 V1.0', '版本 V2.0');
+      if (intro) intro.textContent = intro.textContent.replace('版本 V1.0', '版本 V2.1');
 
       let note = docContent.querySelector('.v2-doc-note');
       if (!note && title) {
@@ -1235,10 +1412,7 @@
     applyV2();
   })();
 </script>
-<style>
-  .page-crumb{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap}
-  .page-crumb .crumb-parent{color:#56657a}.page-crumb .crumb-sep{color:#abb6c4}.page-crumb .crumb-current{color:var(--blue);font-weight:700}
-</style>
+
   <script>
     (() => {
       function setV2TabIdentity(){
@@ -1264,8 +1438,8 @@
       if(!docContent||!docNav||docContent.dataset.v2PrdReady==='true') return;
       const title=docContent.querySelector('h1,h2');
       if(title) title.textContent='店效报告｜PRD 与交互说明 V2';
-      const intro=[...docContent.querySelectorAll('p')].find((node)=>node.textContent.includes('版本 V1.0')||node.textContent.includes('版本 V2.0'));
-      if(intro) intro.textContent='版本 V2.0 · 新域名：待定。面向区域经营管理者、城市经理及门店运营人员。品牌沿用易如翼；报告入口为“经营分析 → 店效报告”，权限管理入口为“权限平台 → 权限配置”。';
+      const intro=[...docContent.querySelectorAll('p')].find((node)=>node.textContent.includes('版本 V1.0')||node.textContent.includes('版本 V2.0')||node.textContent.includes('版本 V2.1'));
+      if(intro) intro.textContent='版本 V2.1 · 新域名：待定。面向区域经营管理者、城市经理及门店运营人员。品牌沿用易如翼；报告入口为“经营分析 → 店效报告”，权限管理入口为“权限平台 → 权限配置”。';
       let note=docContent.querySelector('.v2-doc-note');
       if(!note&&title){note=document.createElement('div');note.className='v2-doc-note';(intro||title).insertAdjacentElement('afterend',note)}
       if(note){note.contentEditable='true';note.innerHTML='<b>V2 页面说明</b><span>新域名待定；报告页仅保留“经营分析 / 店效报告”业务入口。权限平台的“权限配置”提供用户、角色、权限三个 Tab，用于管理页面与数据访问范围。</span>'}
@@ -1300,24 +1474,7 @@
   })();
 </script>
   <!-- 独立产品页：源 PRD 保持不变，此版本仅保留报告预览与既有交互。 -->
-  <style id="standalone-product-page-style">
-    .view-switch,
-    #doc,
-    #doc-format-toolbar,
-    .doc-format-toolbar {
-      display: none !important;
-    }
-
-    #prototype {
-      display: block !important;
-    }
-
-    /* 独立产品页不展示 V2 报告内的快捷导航与概览说明。 */
-    #reports .v2-report-journey,
-    #reports .v2-overview-kicker {
-      display: none !important;
-    }
-</style>
+  
   <script id="standalone-product-page-script">
     (function () {
       function keepProductPageOnly() {
@@ -1333,6 +1490,77 @@
       window.addEventListener('load', function () {
         window.setTimeout(keepProductPageOnly, 160);
       });
+    }());
+  </script>
+  <script id="store-multi-select-script">
+    (function () {
+      const input = document.getElementById('store-add');
+      const control = document.getElementById('store-control');
+      const dropdown = document.getElementById('store-dropdown');
+      if (!input || !control || !dropdown) return;
+
+      input.onchange = null;
+
+      function renderStoreOptions() {
+        const keyword = input.value.trim().toLowerCase();
+        const options = Object.entries(stores).filter(([id, store]) =>
+          !keyword || id.includes(keyword) || store.name.toLowerCase().includes(keyword)
+        );
+        dropdown.innerHTML = options.length
+          ? options.map(([id, store]) => {
+              const isSelected = selected.includes(id);
+              return `<button type="button" class="store-option${isSelected ? ' selected' : ''}" data-store-id="${id}" role="option" aria-selected="${isSelected}"><span class="store-option-name">${id} · ${store.name}</span>${isSelected ? '<span class="store-check">✓</span>' : ''}</button>`;
+            }).join('')
+          : '<div class="store-option-empty">未找到匹配的经销商</div>';
+      }
+
+      function openDropdown() {
+        renderStoreOptions();
+        dropdown.classList.add('open');
+      }
+
+      function closeDropdown() {
+        dropdown.classList.remove('open');
+      }
+
+      const previousRenderChips = renderChips;
+      renderChips = function () {
+        previousRenderChips();
+        renderStoreOptions();
+      };
+
+      input.addEventListener('focus', openDropdown);
+      input.addEventListener('input', openDropdown);
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeDropdown();
+          input.blur();
+        }
+      });
+
+      dropdown.addEventListener('mousedown', function (event) {
+        const option = event.target.closest('[data-store-id]');
+        if (!option) return;
+        event.preventDefault();
+        const id = option.dataset.storeId;
+        if (selected.includes(id)) {
+          selected = selected.filter((item) => item !== id);
+        } else if (selected.length >= 10) {
+          toast('最多选择 10 家经销商');
+          return;
+        } else {
+          selected.push(id);
+        }
+        input.value = '';
+        renderChips();
+        openDropdown();
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!control.contains(event.target)) closeDropdown();
+      });
+
+      renderStoreOptions();
     }());
   </script>
 </body>
